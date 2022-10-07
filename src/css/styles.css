@@ -1,0 +1,335 @@
+body {
+  margin: 0;
+  padding: 0; }
+
+#root {
+  min-height: 100vh;
+  min-width: 100vw; }
+
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw; }
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background-color: #107915; }
+  .header h1 {
+    font-size: 24pt;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: .5rem;
+    padding-left: 1rem;
+    margin: 0; }
+
+.content {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1; }
+
+.dropDown {
+  position: absolute;
+  top: 0px;
+  left: 5px;
+  width: 35px;
+  height: 35px;
+  margin: 2.5px 0 2.5px 5px;
+  display: contents; }
+  .dropDown .dropBtn {
+    position: inherit;
+    top: 0px;
+    left: 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    float: none;
+    width: 35px;
+    height: 35px;
+    margin: 2.5px 0 2.5px 5px;
+    text-align: center;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='35px' height='35px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+    display: none; }
+
+.leftMenu {
+  background-color: #e7e3e3;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 20%;
+  padding: 0;
+  margin: 0;
+  border-right: 1.5px solid #DCDCDC; }
+
+.leftMenuList {
+  margin: 0;
+  padding: 0; }
+
+.leftMenuListElem {
+  list-style-type: none; }
+
+.leftMenuLink {
+  font-size: 13pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  display: flex;
+  padding: .25rem 1.5rem .25rem 1.5rem; }
+  .leftMenuLink:hover {
+    font-size: 13pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white; }
+  .leftMenuLink:focus {
+    font-size: 13pt;
+    color: black;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #DCDCDC; }
+
+.Loader {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center; }
+
+.ContentLoading {
+  border: 8px solid #e7e3e3;
+  /* Light grey */
+  border-top: 8px solid #107915;
+  /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.lists {
+  display: flex;
+  justify-content: left;
+  flex-basis: 80%; }
+
+.TaskListContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: white; }
+
+.TaskList {
+  padding: 0;
+  margin: 0; }
+
+.TaskListTitle {
+  font-size: 15pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: .5rem 1rem .5rem 1rem;
+  margin: 0; }
+
+.TaskListItems {
+  padding: 0 .3rem .5rem .3rem;
+  margin: 0; }
+
+.Task {
+  font-size: 12pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid white;
+  padding: 0;
+  margin: 0; }
+  .Task:hover {
+    font-size: 13pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    border-top: 1px solid #e7e3e3;
+    border-bottom: 1px solid #e7e3e3; }
+
+.ChckbxWrapper {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  flex-grow: 1; }
+
+.Chckbx {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  opacity: 0; }
+
+.ChckbxCustom {
+  cursor: pointer;
+  padding: .5rem 0 .5rem 0; }
+  .ChckbxCustom:before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #DCDCDC;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+    z-index: 0; }
+
+.Chckbx:checked ~ .ChckbxCustom::before {
+  border-color: #107915;
+  background-color: #107915;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"); }
+
+.RemindBtn {
+  border: none;
+  outline: none !important;
+  padding: 0;
+  margin: 0 1.5rem 0 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer; }
+
+.RmBtn {
+  border: none;
+  outline: none !important;
+  padding: 0;
+  margin: 0 1rem 0 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer; }
+
+.InputForm {
+  padding: 0 .3rem 0 .3rem;
+  margin: 0; }
+
+.InputTask {
+  font-size: 11pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid white;
+  padding: .5rem 0 .5rem 0;
+  margin: 0; }
+  .InputTask:hover {
+    border-top: 1px solid #e7e3e3;
+    border-bottom: 1px solid #e7e3e3; }
+  .InputTask:focus {
+    border-top: 1px solid #e7e3e3;
+    border-bottom: 1px solid #e7e3e3;
+    outline: 0; }
+
+@media screen and (max-width: 690px) {
+  .header h1 {
+    font-size: 22pt;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 3.5rem; }
+
+  .content .dropDown {
+    display: contents;
+    margin: 7px 0 7px 5px; }
+    .content .dropDown .dropBtn {
+      display: flex;
+      margin: 7px 0 7px 5px; }
+    .content .dropDown:focus-within .leftMenu {
+      display: flex;
+      flex-basis: 50%; }
+
+  .leftMenu {
+    display: none; }
+
+  .leftMenuLink {
+    font-size: 14pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1.5rem 1rem 1.5rem; }
+    .leftMenuLink:hover {
+      font-size: 14pt;
+      color: black;
+      font-weight: normal;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white; }
+    .leftMenuLink:focus {
+      font-size: 14pt;
+      color: black;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #DCDCDC; }
+
+  .lists {
+    flex-basis: 100%; }
+
+  .TaskListTitle {
+    font-size: 14pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: .5rem 1rem .5rem 2rem;
+    border-bottom: 1px solid #e7e3e3; }
+
+  .TaskListItems {
+    padding: 0 .5rem .5rem .5rem; }
+
+  .Task {
+    font-size: 14pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: .5rem 0 .5rem .1rem; }
+    .Task:hover {
+      font-size: 14pt;
+      color: black;
+      font-weight: normal;
+      font-family: Arial, Helvetica, sans-serif;
+      border: none; }
+
+  .RemindBtn {
+    margin: 0 .4rem 0 .2rem; }
+
+  .RmBtn {
+    margin: 0 .1rem 0 0; }
+
+  .InputForm {
+    padding: 0 1rem 0 1rem;
+    margin: 0; } }
+@media screen and (max-width: 450px) {
+  .header h1 {
+    font-size: 16pt;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 3.5rem; }
+
+  .content .dropDown {
+    display: contents;
+    margin: 2.5px 0 2.5px 5px; }
+    .content .dropDown .dropBtn {
+      display: flex;
+      margin: 2.5px 0 2.5px 5px; }
+    .content .dropDown:focus-within .leftMenu {
+      display: flex;
+      flex-basis: 40%; } }
+
+/*# sourceMappingURL=styles.css.map */

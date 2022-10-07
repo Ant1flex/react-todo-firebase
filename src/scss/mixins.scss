@@ -1,0 +1,6 @@
+@mixin textStyle($size: 12pt, $color: $textColor, $weight: normal) {
+    font-size: $size;
+    color: $color;
+    font-weight: $weight;
+    font-family: Arial, Helvetica, sans-serif;
+}

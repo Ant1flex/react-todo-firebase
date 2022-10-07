@@ -1,0 +1,345 @@
+@import 'variables';
+@import 'mixins';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    background-color: $headerBgColor;
+    h1 {
+        @include textStyle(24pt, $mainColor, bold);
+        padding: .5rem;
+        padding-left: 1rem;
+        margin: 0;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.dropDown{
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    width: 35px;
+    height: 35px;
+    margin: 2.5px 0 2.5px 5px;
+    display: contents;
+    
+    .dropBtn{
+    position: inherit;
+    top: 0px;
+    left: 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    float: none;
+    width: 35px;
+    height: 35px;
+    margin: 2.5px 0 2.5px 5px;
+    text-align: center;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='35px' height='35px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+    display: none;
+    }
+}
+
+.leftMenu {
+    background-color: $secondaryColor;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+    padding: 0;
+    margin: 0;
+    border-right: 1.5px solid $borderColor;
+}
+
+.leftMenuList {
+    margin: 0;
+    padding: 0;
+}
+
+.leftMenuListElem {
+    list-style-type: none;
+}
+
+.leftMenuLink {
+    @include textStyle(13pt);
+    text-decoration: none;
+    display: flex;
+    padding: .25rem 1.5rem .25rem 1.5rem;
+
+    &:hover {
+        @include textStyle(13pt);
+        background-color: $mainColor;
+    }
+    &:focus {
+        @include textStyle(13pt, $weight: bold);
+        background-color: $borderColor;
+    }
+}
+
+.Loader {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+.ContentLoading {
+    border: 8px solid $secondaryColor; /* Light grey */
+    border-top: 8px solid $headerBgColor; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.lists {
+    display: flex;
+    justify-content: left;
+    flex-basis: 80%;
+}
+
+.TaskListContainer{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: $mainColor;
+}
+
+.TaskList {
+    padding: 0;
+    margin: 0;
+}
+
+.TaskListTitle {
+    @include textStyle(15pt);
+    padding: .5rem 1rem .5rem 1rem;
+    margin: 0;
+}
+  
+.TaskListItems {
+    padding: 0 .3rem .5rem .3rem;
+    margin: 0;
+}
+
+.Task {
+    @include textStyle();
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid $mainColor;
+    padding: 0;
+    margin: 0;
+
+    &:hover {
+        @include textStyle(13pt);
+        border-top: 1px solid $secondaryColor;
+        border-bottom: 1px solid $secondaryColor;
+    }
+
+}
+
+.ChckbxWrapper{
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    flex-grow: 1;
+}
+
+.Chckbx {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+}
+
+.ChckbxCustom{
+    cursor: pointer;
+    padding: .5rem 0 .5rem 0;
+
+    &:before{
+        content: '';
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border: 1px solid $borderColor;
+        border-radius: 0.25em;
+        margin-right: 0.5em;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+        z-index: 0;
+    }
+}
+
+.Chckbx:checked~.ChckbxCustom::before{
+    border-color: $headerBgColor;
+    background-color: $headerBgColor;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.RemindBtn {
+    border: none;
+    outline: none !important;
+    padding: 0;
+    margin: 0 1.5rem 0 0;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.RmBtn {
+    border: none;
+    outline: none !important;
+    padding: 0;
+    margin: 0 1rem 0 0;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.InputForm{
+    padding: 0 .3rem 0 .3rem;
+    margin: 0;
+}
+
+.InputTask {
+    @include textStyle(11pt);
+    border: 1px solid $mainColor;
+    padding: .5rem 0 .5rem 0;
+    margin: 0;
+
+    &:hover {
+        border-top: 1px solid $secondaryColor;
+        border-bottom: 1px solid $secondaryColor;
+    }
+    &:focus {
+        border-top: 1px solid $secondaryColor;
+        border-bottom: 1px solid $secondaryColor;
+        outline: 0;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .header{
+        h1 {
+            @include textStyle(22pt, $mainColor, bold);
+            padding-left: 3.5rem;
+        }
+    }
+    .content{
+        .dropDown{
+            display: contents;
+            margin: 7px 0 7px 5px;
+            .dropBtn{
+                display: flex;
+                margin: 7px 0 7px 5px;
+            }
+            &:focus-within .leftMenu{
+                display: flex;
+                flex-basis: 50%;
+            }
+        }
+    }
+    .leftMenu{
+        display: none;
+    }
+    .leftMenuLink {
+        @include textStyle(14pt);
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        padding: 1rem 1.5rem 1rem 1.5rem;
+    
+        &:hover {
+            @include textStyle(14pt);
+            background-color: $mainColor;
+        }
+        &:focus {
+            @include textStyle(14pt, $weight: bold);
+            background-color: $borderColor;
+        }
+    }
+    .lists {
+        flex-basis: 100%;
+    }
+    .TaskListTitle {
+        @include textStyle(14pt);
+        padding: .5rem 1rem .5rem 2rem;
+        border-bottom: 1px solid $secondaryColor;
+    }
+    .TaskListItems {
+        padding: 0 .5rem .5rem .5rem;
+    }
+    .Task {
+        @include textStyle(14pt);
+        padding: .5rem 0 .5rem .1rem;
+        &:hover {
+            @include textStyle(14pt);
+            border: none;
+        }
+    }
+    .RemindBtn {
+        margin: 0 .4rem 0 .2rem;
+    }
+    .RmBtn {
+        margin: 0 .1rem 0 0;
+    }
+    .InputForm{
+        padding: 0 1rem 0 1rem;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .header{
+        h1 {
+            @include textStyle(16pt, $mainColor, bold);
+            padding-left: 3.5rem;
+        }
+    }
+    .content{
+        .dropDown{
+            display: contents;
+            margin: 2.5px 0 2.5px 5px;
+            .dropBtn{
+                display: flex;
+                margin: 2.5px 0 2.5px 5px;
+            }
+            &:focus-within .leftMenu{
+                display: flex;
+                flex-basis: 40%;
+            }
+        }
+    }
+}
