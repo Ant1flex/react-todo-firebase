@@ -1,21 +1,41 @@
-import react from "react"
+import react, { useState, useEffect } from "react"
 
-export default function TaskDescription({ todo, onClose }) {
+export default function TaskDescription({ todo, onClose, onRemind }) {
+    const [remindDate, setremindDate] = useState(todo.date)
+
+    useEffect(() => {
+        setremindDate(todo.date)
+    }, [todo])
+
+    function handleChange(event) {
+        setremindDate(event.target.value)
+    }
+
+    function handleRemind() {
+        onRemind(todo.id, { date: remindDate })
+        console.log(remindDate)
+    }
+
     return (
-        <div>
-            <div>
+        <div className="TaskDescription">
+            <div className="DescHeader">
                 <h1>Task details</h1>
                 <button type='button' className='RemClBtn' onClick={onClose}>✖</button>
             </div>
-            <div>
-                <input
+            <div className="DescInfo">
+                <div className="DescTitle">{todo.title}</div>
+                {/* <input
                     className="InputTask"
                     type='text'
                     value={todo.title}
                     onChange={() => { }}
                     style={{ width: '100%' }}
-                ></input>
-                <div>Status: {todo.completed ? 'Done' : 'Not Done'}</div>
+                ></input> */}
+                {todo.completed &&
+                    <div className="DescStatus">
+                        Status: {todo.completed ? 'Done' : 'Not Done'}
+                    </div>
+                }
 
                 {todo.steps && todo.steps.length > 0 &&
                     <div>
@@ -46,17 +66,26 @@ export default function TaskDescription({ todo, onClose }) {
                     </div>
                 }
 
-                {todo.date &&
-                    <div>
-                        <br />
-                        <div>Remind me at time/date</div>
-                        <div>
+                {!todo.completed &&
+                    <div className="DescReminder">
+                        <div>Remind me at:</div>
+                        <div className="DescReminderForm">
                             <input
+                                className="InputTask"
+                                type='datetime-local'
+                                value={
+                                    remindDate
+                                }
+                                onChange={handleChange}
+                                style={{ width: '100%' }}
+                            ></input>
+                            <button type='button' className='RemindBtn' onClick={handleRemind} title='Set Remind'>🔔</button>
+                            {/* <input
                                 className="InputTask"
                                 type='text'
                                 value={
-                                    new Date(todo.date.seconds * 1000).getHours() + ':' +
-                                    new Date(todo.date.seconds * 1000).getMinutes()
+                                    reminder.getHours() + ':' +
+                                    reminder.getMinutes()
                                 }
                                 onChange={() => { }}
                                 style={{ width: '100%' }}
@@ -65,13 +94,13 @@ export default function TaskDescription({ todo, onClose }) {
                                 className="InputTask"
                                 type='text'
                                 value={
-                                    new Date(todo.date.seconds * 1000).getDate() + '.' +
-                                    new Date(todo.date.seconds * 1000).getMonth() + '.' +
-                                    new Date(todo.date.seconds * 1000).getFullYear()
+                                    reminder.getDate() + '.' +
+                                    reminder.getMonth() + '.' +
+                                    reminder.getFullYear()
                                 }
                                 onChange={() => { }}
                                 style={{ width: '100%' }}
-                            ></input>
+                            ></input> */}
                         </div>
                     </div>
                 }

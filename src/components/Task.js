@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Task({ todo, onUpdate, onDelete, onSelect }) {
+export default function Task({ todo, selectedTodo, onUpdate, onDelete, onSelect }) {
+
+    useEffect(() => {
+        if (selectedTodo) {
+            onSelect(todo, { date: '' })
+        }
+    }, [todo]) // trouble here
 
     function handleChange(completed) {
         onUpdate(todo.id, { completed: completed.target.checked })
@@ -15,7 +21,7 @@ export default function Task({ todo, onUpdate, onDelete, onSelect }) {
                     {todo.title}
                 </label>
 
-                <button type='button' className='RemindBtn' onClick={() => onSelect(todo)} title='More Details'>📋</button>
+                <button type='button' className='DescBtn' onClick={() => onSelect(todo, { date: '' })} title='More Details'>📋</button>
                 <button type='button' className='RmBtn' onClick={() => onDelete(todo.id)} title='Remove'>❌</button>
             </li>
         </div>

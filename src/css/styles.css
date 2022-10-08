@@ -16,8 +16,13 @@ body {
 .header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: #107915; }
-  .header h1 {
+
+.headerText {
+  display: flex;
+  flex-direction: row; }
+  .headerText h1 {
     font-size: 24pt;
     color: white;
     font-weight: bold;
@@ -25,6 +30,37 @@ body {
     padding: .5rem;
     padding-left: 1rem;
     margin: 0; }
+
+.headerUser {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #107915; }
+  .headerUser h3 {
+    font-size: 12pt;
+    color: white;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: .25rem;
+    padding-right: .5rem;
+    margin: 0; }
+  .headerUser button {
+    font-size: 10pt;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    border-radius: 15%;
+    outline: none !important;
+    padding: .1rem;
+    margin: 0 .5rem .25rem 0;
+    color: inherit;
+    background-color: transparent;
+    color: white;
+    cursor: pointer; }
+    .headerUser button:hover {
+      border-top: 1px solid #e7e3e3;
+      border-bottom: 1px solid #e7e3e3; }
 
 .content {
   display: flex;
@@ -118,10 +154,24 @@ body {
   justify-content: left;
   flex-basis: 80%; }
 
+.ContentContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 100%;
+  background-color: white; }
+
 .TaskListContainer {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  width: 100%;
+  background-color: white; }
+
+.DescriptionContainer {
+  display: flex;
+  flex-direction: column;
   background-color: white; }
 
 .TaskList {
@@ -152,10 +202,6 @@ body {
   padding: 0;
   margin: 0; }
   .Task:hover {
-    font-size: 13pt;
-    color: black;
-    font-weight: normal;
-    font-family: Arial, Helvetica, sans-serif;
     border-top: 1px solid #e7e3e3;
     border-bottom: 1px solid #e7e3e3; }
 
@@ -195,7 +241,7 @@ body {
   background-color: #107915;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"); }
 
-.RemindBtn {
+.DescBtn {
   border: none;
   outline: none !important;
   padding: 0;
@@ -220,7 +266,7 @@ body {
   margin: 0; }
 
 .InputTask {
-  font-size: 11pt;
+  font-size: 12pt;
   color: black;
   font-weight: normal;
   font-family: Arial, Helvetica, sans-serif;
@@ -234,6 +280,89 @@ body {
     border-top: 1px solid #e7e3e3;
     border-bottom: 1px solid #e7e3e3;
     outline: 0; }
+
+.TaskDescription {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: .5rem .5rem 0 .25rem;
+  border-left: 1px solid #DCDCDC;
+  background-color: white; }
+
+.DescHeader {
+  display: flex;
+  flex-direction: row;
+  width: 20vw;
+  justify-content: space-between; }
+  .DescHeader h1 {
+    font-size: 12pt;
+    color: black;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: .2rem 0 .2rem 0;
+    margin: 0; }
+  .DescHeader button {
+    border: none;
+    outline: none !important;
+    padding: 0;
+    margin: 0 .25rem .25rem 0;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer; }
+
+.DescInfo {
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  font-size: 12pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.DescTitle {
+  text-align: center;
+  margin: .25rem 0 0 0;
+  font-size: 13pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.DescStatus {
+  margin-top: .5rem; }
+
+.DescReminder {
+  margin-top: .5rem;
+  font-size: 12pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.DescReminderForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .DescReminderForm input {
+    font-size: 12pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif; }
+  .DescReminderForm button {
+    width: 20%;
+    font-size: 16pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    outline: none !important;
+    padding: 0;
+    margin: 0 .25rem .25rem 0;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer; }
+    .DescReminderForm button:hover {
+      border-left: 1px solid #e7e3e3;
+      border-right: 1px solid #e7e3e3; }
 
 @media screen and (max-width: 690px) {
   .header h1 {
@@ -305,7 +434,7 @@ body {
       font-family: Arial, Helvetica, sans-serif;
       border: none; }
 
-  .RemindBtn {
+  .DescBtn {
     margin: 0 .4rem 0 .2rem; }
 
   .RmBtn {

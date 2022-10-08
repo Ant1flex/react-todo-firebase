@@ -2,7 +2,7 @@ import React from "react";
 
 import Task from './Task'
 
-export default function TaskList({ list, todos, onUpdate, onDelete, onSelect}) {
+export default function TaskList({ list, todos, selectedTodo, onUpdate, onDelete, onSelect}) {
 
     return (
         <div className='TaskList'>
@@ -14,6 +14,7 @@ export default function TaskList({ list, todos, onUpdate, onDelete, onSelect}) {
                     <Task
                         key={todo.id}
                         todo={todo}
+                        selectedTodo={selectedTodo}
                         onUpdate={onUpdate}
                         onDelete={onDelete}
                         onSelect={onSelect}

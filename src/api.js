@@ -98,7 +98,7 @@ export function addTask(data) {
     listId: '',
     completed: false,
     notes: '',
-    date: null,
+    date: '',
     steps: [],
     ...data,
   }).then(docRef => {

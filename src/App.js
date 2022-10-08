@@ -9,6 +9,8 @@ import DataContext from './context/data'
 import TaskListContainer from './containers/TaskListContainer'
 import SignInContainer from './containers/SignInContainer'
 
+import moment from 'moment'
+
 function App() {
   // const { state, actions } = useStore()
 
@@ -21,6 +23,8 @@ function App() {
     }
   }, [state, dispatch]) //trouble here
 
+  const format = 'DD-MM-YYYYTH:mm'
+
   useEffect(() => {
     actions.setAuth(dispatch)
   }, [dispatch])
@@ -32,6 +36,25 @@ function App() {
     }
   }, [dispatch, state.user])
 
+  // useEffect(() => {
+  //   state.todos.map(todo =>
+  //     setInterval(() => {
+  //       if (todo.date !== '') {
+  //         console.log(todo.title + ' tick')
+  //         console.log(moment().format(format) + ' now')
+  //         console.log(moment(todo.date).format(format))
+  //         if (moment(todo.date).format(format) === moment().format(format)) {
+  //           console.log('REMIND!!!')
+  //           console.log('REMIND!!!')
+  //           console.log('REMIND!!!')
+  //           console.log('REMIND!!!')
+  //           console.log('REMIND!!!')
+  //         }
+  //       }
+  //     }, 30000)
+  //   )
+  // })
+
 
   if (!state.user) {
     return <SignInContainer />
@@ -41,11 +64,11 @@ function App() {
         <div className="App">
           <div className="header">
             <div className='headerText'>
-              <h1>My ToDo list</h1>
+              <h1>My ToDo Glist</h1>
             </div>
             <div className="headerUser">
               <h3>{state.user ? state.user.email : '---'}</h3>
-              <button type='button' className="logout" title='Sign Out' onClick={() => actions.logoutUser()}>Sign Out</button>
+              <button type='button' className="logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}>LogOut</button>
             </div>
 
           </div>

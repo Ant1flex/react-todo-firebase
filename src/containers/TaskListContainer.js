@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useParams, useMatch } from "react-router-dom";
 
 import TaskList from '../components/TaskList'
@@ -7,6 +7,7 @@ import TaskDescription from '../components/TaskDescription'
 
 import { actions } from '../store'
 import DataContext from "../context/data";
+import moment from 'moment'
 
 export default function TaskListContainer() {
     const { state, dispatch } = useContext(DataContext)
@@ -20,7 +21,7 @@ export default function TaskListContainer() {
 
     // useEffect(() => {
     //     setSelectedTodo(null)
-        
+
     //     if(match.pattern.path === 'all') {
     //         actions.getTodos(state.user.uid, dispatch)
     //     } else if(match.pattern.path === 'planned') {
@@ -28,7 +29,7 @@ export default function TaskListContainer() {
     //     } else {
     //         actions.getListTodos(match.pattern.path, dispatch)
     //     }
-        
+
 
     //     // if (match.pattern.path === 'all') {
     //     //     actions.get('todos')(collection => collection)
@@ -42,11 +43,11 @@ export default function TaskListContainer() {
     // }, [dispatch, match.pattern.path])
 
     function handleSubmit(title) {
-        actions.addTask({
-            title,
-            userId: state.user.uid,
-            listId: list.id || '',
-        }, dispatch)
+            actions.addTask({
+                title,
+                userId: state.user.uid,
+                listId: list.id || '',
+            }, dispatch)
     }
 
     function handleDelete(todoId) {
@@ -58,27 +59,36 @@ export default function TaskListContainer() {
         actions.updateTask(todoId, data, dispatch)
     }
 
-    function handleSelect(todo) {
-        setSelectedTodo(todo, dispatch)
+    function handleSelect(todo, data) {
+        if((todo.date !== '') && (moment(todo.date).format() <= moment().format())){
+            actions.updateTask(todo.id, data, dispatch)
+            setSelectedTodo(todo, dispatch)
+        } else {
+            setSelectedTodo(todo, dispatch)
+        }
     }
 
-    const list = state.lists.find(list => list.id === match.pattern.path) || { title: 'Tasks'}
+    function handleRemind(todoId, data){
+        actions.updateTask(todoId, data, dispatch)
+    }
+
+    const list = state.lists.find(list => list.id === match.pattern.path) || { title: 'Tasks' }
     const path = match.pattern.path
 
     const getTodosByFilter = ({
-        'all': todos => todos.filter(todo => todo.listId == ''),
-        'planned': todos => todos.filter(todo => todo.date)
+        'all': todos => todos.filter(todo => todo.listId === ''),
+        'planned': todos => todos.filter(todo => todo.date !== '')
     })
 
     const getTodosByList = (path, todos) => todos.filter(todo => todo.listId === path)
 
     let todos
-    if(path !== 'all' && path != 'planned'){
+    if (path !== 'all' && path !== 'planned') {
         todos = getTodosByList(path, state.todos)
     } else {
         todos = getTodosByFilter[path](state.todos)
     }
-    
+
     if (!list || !todos) {
         return (
             <div className="Loader">
@@ -128,26 +138,29 @@ export default function TaskListContainer() {
 
 
     return (
-        <div className='TaskListContainer'>
-            <TaskList
-                list={list}
-                todos={todos}
-                selectedTodo={selectedTodo}
-                onSelect={handleSelect}
-                onDelete={handleDelete}
-                onUpdate={handleUpdate}
-            ></TaskList>
-            <TaskForm
-                onSubmit={handleSubmit}
-            ></TaskForm>
-
-            {selectedTodo &&
-                <TaskDescription
-                    todo={selectedTodo}
-                    onClose={() => setSelectedTodo(null)}
-                ></TaskDescription>
-            }
-
+        <div className='ContentContainer'>
+            <div className='TaskListContainer'>
+                <TaskList
+                    list={list}
+                    todos={todos}
+                    selectedTodo={selectedTodo}
+                    onSelect={handleSelect}
+                    onDelete={handleDelete}
+                    onUpdate={handleUpdate}
+                ></TaskList>
+                <TaskForm
+                    onSubmit={handleSubmit}
+                ></TaskForm>
+            </div>
+            <div className='DescriptionContainer'>
+                {selectedTodo &&
+                    <TaskDescription
+                        todo={selectedTodo}
+                        onClose={() => setSelectedTodo(null)}
+                        onRemind={handleRemind}
+                    ></TaskDescription>
+                }
+            </div>
         </div>
 
     );
