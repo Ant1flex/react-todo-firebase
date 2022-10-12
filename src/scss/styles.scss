@@ -31,8 +31,7 @@ body {
     flex-direction: row;
     h1 {
         @include textStyle(24pt, $mainColor, bold);
-        padding: .5rem;
-        padding-left: 1rem;
+        padding: .5rem .5rem .5rem 1rem;
         margin: 0;
     }
 }
@@ -50,6 +49,7 @@ body {
     }
     button {
         @include textStyle(10pt, $mainColor, bold);
+        text-decoration: underline;
         // border: 1px solid $borderColor;
         border: none;
         border-radius: 15%;
@@ -61,6 +61,7 @@ body {
         color: $mainColor;
         cursor: pointer;
         &:hover {
+            text-decoration: none;
             // background-color: darken($headerBgColor, 5%);
             border-top: 1px solid $secondaryColor;
             border-bottom: 1px solid $secondaryColor;
@@ -105,7 +106,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-basis: 20%;
-    padding: 0;
+    padding: .5rem 0 0 0;
     margin: 0;
     border-right: 1.5px solid $borderColor;
 }
@@ -123,15 +124,46 @@ body {
     @include textStyle(13pt);
     text-decoration: none;
     display: flex;
+    justify-content: space-between;
     padding: .25rem 1.5rem .25rem 1.5rem;
-
+    margin: .25rem 0 .25rem 0;
     &:hover {
-        @include textStyle(13pt);
         background-color: $mainColor;
     }
     &:focus {
-        @include textStyle(13pt, $weight: bold);
         background-color: $borderColor;
+    }
+    div{
+        margin-top: .1rem;
+    }
+    button{
+        padding: 0;
+        border: none;
+        outline: none !important;
+        font: inherit;
+        color: inherit;
+        background-color: transparent;
+        cursor: pointer;
+        &:hover {
+            @include textStyle(13pt, $weight: bold);
+            background-color: $mainColor;
+        }
+    }
+}
+
+.InputList{
+    @include textStyle(13pt);
+    padding: .5rem 1.25rem .5rem 1.25rem;
+    margin: 0;
+    border: none;
+    background-color: $secondaryColor;
+
+    &:hover {
+        background-color: $mainColor;
+    }
+    &:focus {
+        background-color: $mainColor;
+        outline: 0;
     }
 }
 
@@ -313,7 +345,7 @@ body {
 .DescHeader{
     display: flex;
     flex-direction: row;
-    width: 20vw;
+    width: 15vw;
     justify-content: space-between;
     h1{
         @include textStyle(12pt, $textColor, bold);
@@ -404,9 +436,6 @@ body {
     }
     .leftMenuLink {
         @include textStyle(14pt);
-        text-decoration: none;
-        display: flex;
-        justify-content: center;
         padding: 1rem 1.5rem 1rem 1.5rem;
     
         &:hover {
@@ -414,9 +443,21 @@ body {
             background-color: $mainColor;
         }
         &:focus {
-            @include textStyle(14pt, $weight: bold);
+            @include textStyle(14pt);
             background-color: $borderColor;
         }
+        div{
+            margin-top: .15rem;
+        }
+        button{
+            &:hover {
+                @include textStyle(14pt, $weight: bold);
+            }
+        }
+    }
+    .InputList{
+        @include textStyle(14pt);
+        padding: 1rem 1.25rem 1rem 1.25rem;
     }
     .lists {
         flex-basis: 100%;
@@ -451,9 +492,57 @@ body {
 
 @media screen and (max-width: 450px) {
     .header{
+        flex-direction: column;
+    }
+    .headerText{
         h1 {
             @include textStyle(16pt, $mainColor, bold);
-            padding-left: 3.5rem;
+            padding-left: 4.5rem;
+        }
+    }
+    .headerUser{
+        flex-direction: row;
+        justify-content: space-between;
+        h3 {
+            @include textStyle(12pt, $mainColor);
+            padding: 0 0 .5rem 4.5rem;
+            margin: 0;
+        }
+        button {
+            border-radius: 0;
+            border-left: 1px solid $secondaryColor;
+            margin: 0 0 .4rem .25rem;
+            padding: .1rem .5rem .1rem .5rem;
+            &:hover {
+                // background-color: darken($headerBgColor, 5%);
+                border-top: 1px solid $secondaryColor;
+                border-bottom: 1px solid $secondaryColor;
+            }
+        }
+    }
+    .dropDown{
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 50px;
+        height: 50px;
+        margin: 25px 0 25px 5px;
+        display: contents;
+        
+        .dropBtn{
+        position: inherit;
+        top: 5px;
+        left: 5px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        float: none;
+        width: 50px;
+        height: 50px;
+        margin: 25px 0 25px 5px;
+        text-align: center;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='50px' height='50px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+        display: none;
         }
     }
     .content{
@@ -466,7 +555,7 @@ body {
             }
             &:focus-within .leftMenu{
                 display: flex;
-                flex-basis: 40%;
+                flex-basis: 150%;
             }
         }
     }

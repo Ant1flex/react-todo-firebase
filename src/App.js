@@ -36,6 +36,31 @@ function App() {
     }
   }, [dispatch, state.user])
 
+
+  const [isListFormOpen, setListFormOpen] = useState(false)
+  const [listTitle, setListTitle] = useState('')
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    actions.addList({
+      title: listTitle,
+      userId: state.user.uid
+    }, dispatch).then(() => {
+      setListTitle('')
+      setListFormOpen(false)
+    })
+  }
+
+  function handleChange(event) {
+    setListTitle(event.target.value)
+  }
+
+  function handleDelete(listId) {
+    state.todos.map(todo => (todo.listId === listId) && actions.deleteTask(todo.id, dispatch))
+    console.log('Removed list id: ', listId)
+    actions.deleteList(listId, dispatch)
+  }
+
   // useEffect(() => {
   //   state.todos.map(todo =>
   //     setInterval(() => {
@@ -64,7 +89,7 @@ function App() {
         <div className="App">
           <div className="header">
             <div className='headerText'>
-              <h1>My ToDo Glist</h1>
+              <h1>Todo.My</h1>
             </div>
             <div className="headerUser">
               <h3>{state.user ? state.user.email : '---'}</h3>
@@ -96,10 +121,28 @@ function App() {
                   <hr className="leftMenuSeparator"></hr>
                   {state.lists.map(item =>
                     <li className="leftMenuListElem" key={item.id}>
-                      <Link className="leftMenuLink" to={item.id}>{item.title}</Link>
-                      {console.log(item)}
+                      <Link className="leftMenuLink" to={item.id}>
+                        <div>{item.title}</div>
+                        <button type='button' className='RemClBtn' onClick={() => { handleDelete(item.id) }} >✖</button>
+                      </Link>
+
                     </li>
                   )}
+                  <li className="leftMenuListElem">
+                    <div>
+                      <form onSubmit={handleSubmit}>
+                        <input
+                          className="InputList"
+                          type='text'
+                          placeholder=' New list...'
+                          value={listTitle}
+                          onChange={handleChange}
+                          style={{ width: '100%' }}
+                        ></input>
+                      </form>
+                    </div>
+
+                  </li>
                 </ul>
               </div>
             </div>

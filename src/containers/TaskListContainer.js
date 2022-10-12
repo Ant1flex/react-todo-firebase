@@ -51,7 +51,7 @@ export default function TaskListContainer() {
     }
 
     function handleDelete(todoId) {
-        console.log('Removed id: ', todoId)
+        console.log('Removed todo id: ', todoId)
         actions.deleteTask(todoId, dispatch)
     }
 
@@ -72,11 +72,12 @@ export default function TaskListContainer() {
         actions.updateTask(todoId, data, dispatch)
     }
 
-    const list = state.lists.find(list => list.id === match.pattern.path) || { title: 'Tasks' }
+    const list = state.lists.find(list => list.id === match.pattern.path) ||  ((match.pattern.path==='planned') ? { title: 'Planned tasks' } : { title: 'Tasks' })
     const path = match.pattern.path
 
     const getTodosByFilter = ({
-        'all': todos => todos.filter(todo => todo.listId === ''),
+        //'all': todos => todos.filter(todo => todo.listId === ''),
+        'all': todos => todos.filter(todo => todo.userId),
         'planned': todos => todos.filter(todo => todo.date !== '')
     })
 

@@ -21,6 +21,30 @@ export function reducer(state, action) {
                 lists: action.payload.lists
             }
 
+        case 'ADD_LIST':
+            return {
+                ...state,
+                lists: state.lists.concat(action.payload.list)
+            }
+        case 'UPDATE_LIST':
+            return {
+                ...state,
+                lists: state.lists.map(list => {
+                    if (list.id === action.payload.list.id) {
+                        return {
+                            ...list,
+                            ...action.payload.list
+                        }
+                    }
+                    return list
+                })
+            }
+        case 'DELETE_LIST':
+            return {
+                ...state,
+                lists: state.lists.filter(list => list.id !== action.payload.listId)
+            }
+
         case 'GET_TODOS':
             return {
                 ...state,
@@ -113,6 +137,36 @@ export function getLists(userId, dispatch) {
         }))
 }
 
+export function addList(data, dispatch) {
+    return api.addList(data)
+        .then(list => dispatch({
+            type: 'ADD_LIST',
+            payload: {
+                list
+            }
+        }))
+}
+
+export function updateList(listId, data, dispatch) {
+    return api.updateList(listId, data)
+        .then(list => dispatch({
+            type: 'UPDATE_LIST',
+            payload: {
+                list
+            }
+        }))
+}
+
+export function deleteList(listId, dispatch) {
+    return api.deleteList(listId)
+        .then(todoId => dispatch({
+            type: 'DELETE_LIST',
+            payload: {
+                listId
+            }
+        }))
+}
+
 export function getTodos(userId, dispatch) {
     return api.getTodos(userId)
         .then(todos => dispatch({
@@ -179,6 +233,9 @@ export const actions = {
     registerUser,
     setAuth,
     getLists,
+    addList,
+    updateList,
+    deleteList,
     getTodos,
     // getPlannedTodos,
     getListTodos,

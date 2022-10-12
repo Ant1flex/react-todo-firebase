@@ -44,6 +44,31 @@ export function getLists(userId) {
     });
 }
 
+export function addList(data) {
+  return db.collection('lists').add({
+    todos: [],
+    ...data,
+  }).then(docRef => {
+    return docRef.get()
+  }).then(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }))
+}
+
+export function updateList(listId, data) {
+  return db.collection('lists').doc(listId).update(data)
+    .then(() => ({
+      id: listId,
+      ...data
+    }))
+}
+
+export function deleteList(listId) {
+  return db.collection('lists').doc(listId).delete()
+    .then(() => listId)
+}
+
 export function getTodos(userId) {
   return db.collection('todos')
     .where('userId', '==', userId)

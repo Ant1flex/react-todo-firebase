@@ -27,8 +27,7 @@ body {
     color: white;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    padding: .5rem;
-    padding-left: 1rem;
+    padding: .5rem .5rem .5rem 1rem;
     margin: 0; }
 
 .headerUser {
@@ -49,6 +48,7 @@ body {
     color: white;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
     border: none;
     border-radius: 15%;
     outline: none !important;
@@ -59,6 +59,7 @@ body {
     color: white;
     cursor: pointer; }
     .headerUser button:hover {
+      text-decoration: none;
       border-top: 1px solid #e7e3e3;
       border-bottom: 1px solid #e7e3e3; }
 
@@ -95,7 +96,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-basis: 20%;
-  padding: 0;
+  padding: .5rem 0 0 0;
   margin: 0;
   border-right: 1.5px solid #DCDCDC; }
 
@@ -113,19 +114,44 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   display: flex;
-  padding: .25rem 1.5rem .25rem 1.5rem; }
+  justify-content: space-between;
+  padding: .25rem 1.5rem .25rem 1.5rem;
+  margin: .25rem 0 .25rem 0; }
   .leftMenuLink:hover {
-    font-size: 13pt;
-    color: black;
-    font-weight: normal;
-    font-family: Arial, Helvetica, sans-serif;
     background-color: white; }
   .leftMenuLink:focus {
-    font-size: 13pt;
-    color: black;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
     background-color: #DCDCDC; }
+  .leftMenuLink div {
+    margin-top: .1rem; }
+  .leftMenuLink button {
+    padding: 0;
+    border: none;
+    outline: none !important;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer; }
+    .leftMenuLink button:hover {
+      font-size: 13pt;
+      color: black;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white; }
+
+.InputList {
+  font-size: 13pt;
+  color: black;
+  font-weight: normal;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: .5rem 1.25rem .5rem 1.25rem;
+  margin: 0;
+  border: none;
+  background-color: #e7e3e3; }
+  .InputList:hover {
+    background-color: white; }
+  .InputList:focus {
+    background-color: white;
+    outline: 0; }
 
 .Loader {
   display: flex;
@@ -292,7 +318,7 @@ body {
 .DescHeader {
   display: flex;
   flex-direction: row;
-  width: 20vw;
+  width: 15vw;
   justify-content: space-between; }
   .DescHeader h1 {
     font-size: 12pt;
@@ -390,9 +416,6 @@ body {
     color: black;
     font-weight: normal;
     font-family: Arial, Helvetica, sans-serif;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
     padding: 1rem 1.5rem 1rem 1.5rem; }
     .leftMenuLink:hover {
       font-size: 14pt;
@@ -403,9 +426,23 @@ body {
     .leftMenuLink:focus {
       font-size: 14pt;
       color: black;
-      font-weight: bold;
+      font-weight: normal;
       font-family: Arial, Helvetica, sans-serif;
       background-color: #DCDCDC; }
+    .leftMenuLink div {
+      margin-top: .15rem; }
+    .leftMenuLink button:hover {
+      font-size: 14pt;
+      color: black;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif; }
+
+  .InputList {
+    font-size: 14pt;
+    color: black;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1rem 1.25rem 1rem 1.25rem; }
 
   .lists {
     flex-basis: 100%; }
@@ -444,12 +481,57 @@ body {
     padding: 0 1rem 0 1rem;
     margin: 0; } }
 @media screen and (max-width: 450px) {
-  .header h1 {
+  .header {
+    flex-direction: column; }
+
+  .headerText h1 {
     font-size: 16pt;
     color: white;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    padding-left: 3.5rem; }
+    padding-left: 4.5rem; }
+
+  .headerUser {
+    flex-direction: row;
+    justify-content: space-between; }
+    .headerUser h3 {
+      font-size: 12pt;
+      color: white;
+      font-weight: normal;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 0 0 .5rem 4.5rem;
+      margin: 0; }
+    .headerUser button {
+      border-radius: 0;
+      border-left: 1px solid #e7e3e3;
+      margin: 0 0 .4rem .25rem;
+      padding: .1rem .5rem .1rem .5rem; }
+      .headerUser button:hover {
+        border-top: 1px solid #e7e3e3;
+        border-bottom: 1px solid #e7e3e3; }
+
+  .dropDown {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 50px;
+    margin: 25px 0 25px 5px;
+    display: contents; }
+    .dropDown .dropBtn {
+      position: inherit;
+      top: 5px;
+      left: 5px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      float: none;
+      width: 50px;
+      height: 50px;
+      margin: 25px 0 25px 5px;
+      text-align: center;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='50px' height='50px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+      display: none; }
 
   .content .dropDown {
     display: contents;
@@ -459,6 +541,6 @@ body {
       margin: 2.5px 0 2.5px 5px; }
     .content .dropDown:focus-within .leftMenu {
       display: flex;
-      flex-basis: 40%; } }
+      flex-basis: 150%; } }
 
 /*# sourceMappingURL=styles.css.map */
