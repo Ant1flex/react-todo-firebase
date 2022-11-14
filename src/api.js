@@ -24,6 +24,16 @@ export function registerUser(email, password) {
     });
 }
 
+export function updateUsername(username) {
+  auth.currentUser.updateProfile({
+    displayName: username
+  }).then(() => {
+    console.log('USERNAME UPDATED')
+  }).catch((error) => {
+    console.log(error)
+  });  
+}
+
 export function onAuth(handleAuth) {
   auth.onAuthStateChanged(handleAuth);
 }

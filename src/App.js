@@ -36,6 +36,7 @@ function App() {
     }
   }, [dispatch, state.user])
 
+  // for lists handling
 
   const [isListFormOpen, setListFormOpen] = useState(false)
   const [listTitle, setListTitle] = useState('')
@@ -61,24 +62,44 @@ function App() {
     actions.deleteList(listId, dispatch)
   }
 
-  // useEffect(() => {
-  //   state.todos.map(todo =>
-  //     setInterval(() => {
-  //       if (todo.date !== '') {
-  //         console.log(todo.title + ' tick')
-  //         console.log(moment().format(format) + ' now')
-  //         console.log(moment(todo.date).format(format))
-  //         if (moment(todo.date).format(format) === moment().format(format)) {
-  //           console.log('REMIND!!!')
-  //           console.log('REMIND!!!')
-  //           console.log('REMIND!!!')
-  //           console.log('REMIND!!!')
-  //           console.log('REMIND!!!')
-  //         }
-  //       }
-  //     }, 30000)
-  //   )
-  // })
+  // for remind
+
+  const [chatId, setChatId] = useState(0)
+  const [flag, setFlag] = useState(false)
+
+  const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
+
+  useEffect(() => {
+      fetch("http://localhost:8000/")
+      .then(res => res.json())
+      .then((result) => actions.updateUsername(result, dispatch))
+      .catch(err => console.log(err.name))
+  }, [flag])
+
+  
+  //.then(console.log('Connected with: ' + state.user.displayName))
+
+  function changeFlag() {
+    setFlag(!flag)
+  }
+
+  useEffect(() => {
+    state.todos.map(todo =>
+      setInterval(() => {
+        if (todo.date !== '') {
+          console.log(todo.title + ' tick')
+          console.log('Current time:' + moment().format(format))
+          console.log('Remind at:' + moment(todo.date).format(format))
+          if (moment(todo.date).format(format) === moment().format(format)) {
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${chatId}&text=Don't%20forget%20your%20scheduled%20tasks:%0A%20-${todo.title}`, {
+              method: "GET"
+            }).then(console.log("Don't forget your scheduled tasks:\n" + " -" + todo.title))
+            actions.updateTask(todo.id, todo.date = '', dispatch)
+          }
+        }
+      }, 30000)
+    )
+  })
 
 
   if (!state.user) {
@@ -93,7 +114,15 @@ function App() {
             </div>
             <div className="headerUser">
               <h3>{state.user ? state.user.email : '---'}</h3>
-              <button type='button' className="logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}>LogOut</button>
+              <div>
+                {
+                  (!state.user.displayName) ?
+                    <button type='button' className="logoutBtn" title='Connect your Telegram' onClick={changeFlag}><a href="https://t.me/mtd_reminder_bot?start=666" target="_blank">Connect Telegram</a></button>
+                    :
+                    <h3>Telegram connected!{state.user.displayName}</h3>
+                }
+                <button type='button' className="logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}>LogOut</button>
+              </div>
             </div>
 
           </div>

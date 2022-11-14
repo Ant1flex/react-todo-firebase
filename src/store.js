@@ -13,6 +13,11 @@ export function reducer(state, action) {
                 ...state,
                 user: null
             }
+            // case 'UPDATE_USERNAME':
+            // return {
+            //     ...state,
+            //     user: action.payload.username
+            // }
 
         case 'GET_LISTS':
             return {
@@ -106,6 +111,24 @@ export function logoutUser(dispatch) {
 export function registerUser(email, password, dispatch) {
     return api.registerUser(email, password)
 }
+
+export function updateUsername(username, dispatch) {
+    return api.updateUsername(username)
+}
+
+// export function updateUsername(username, dispatch) {
+//     api.onAuth((user) => {
+//         if (user) {
+//             // User is signed in
+//             return api.updateUsername({
+//                 type: 'UPDATE_USERNAME',
+//                 payload: {
+//                     username
+//                 }
+//             })
+//         }
+//     })
+// }
 
 export function setAuth(dispatch) {
     api.onAuth((user) => {
@@ -231,6 +254,7 @@ export const actions = {
     loginUser,
     logoutUser,
     registerUser,
+    updateUsername,
     setAuth,
     getLists,
     addList,
