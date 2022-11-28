@@ -1,6 +1,141 @@
 @import 'variables';
 @import 'mixins';
 
+// authorization page
+*{
+    box-sizing: border-box;
+}
+
+.authContainer{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 8%;
+}
+
+.authTitle{
+    display: flex;
+    justify-content: center;
+}
+
+.authTitleIcon{
+    border: 4px solid $headerBgColor;
+    border-radius: 50%;
+    box-shadow: 0px 0px 30px $headerBgColor, 0px 10px 10px $headerBgColor;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    width: 120px;
+    height: 120px;
+    background: no-repeat;
+    background-image: url('../resource/avatar.svg');
+}
+
+.authTitleText{
+    @include textStyle(28pt, $avatarColor, bold);
+    padding: .5rem 0 .5rem 0;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.authFields{
+    display: flex;
+    flex-direction: column;
+}
+
+.authEmailWrap{
+    padding: 1rem 0 1rem 0;
+}
+
+.authEmail{
+    @include setMrPd();
+    @include textStyle(16pt, $avatarColor, bold);
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    background: 0 0;
+    background-color: $secondaryColor;
+    height: 62px;
+    padding: 0 20px 0 38px;
+    outline: none;
+    border: 2px solid $secondaryColor;
+    border-radius: 5px;
+    transition: 1s;
+    &:focus{
+        border: 2px solid $headerBgColor
+    }
+    &::placeholder{
+        color: $placeholderColor;
+    }
+}
+
+.authPasswordWrap{
+    padding: 1rem 0 1rem 0;
+}
+
+.authPassword{
+    @include setMrPd();
+    @include textStyle(16pt, $avatarColor, bold);
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+    background: 0 0;
+    background-color: $secondaryColor;
+    height: 62px;
+    padding: 0 20px 0 38px;
+    outline: none;
+    border: 2px solid $secondaryColor;
+    border-radius: 5px;
+    transition: 1s;
+    &:focus{
+        border: 2px solid $headerBgColor
+    }
+    &::placeholder{
+        color: $placeholderColor;
+    }
+}
+
+.authButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.signInBtn{
+    @include textStyle(16pt, $mainColor, bold);
+    flex-grow: 1;
+    width:100%;
+    margin: 2rem 1rem 1rem 0;
+    padding: 1rem;
+    background-color: $headerBgColor;
+    border: none;
+    border-radius: 5px;
+    &:hover{
+        background-color: darken($headerBgColor, 5%);
+    }
+}
+
+.signUpBtn{
+    @include textStyle(16pt, $mainColor, bold);
+    flex-grow: 1;
+    width:100%;
+    margin: 2rem 0 1rem 1rem;
+    padding: 1rem;
+    background-color: $headerBgColor;
+    border: none;
+    border-radius: 5px;
+    &:hover{
+        background-color: darken($headerBgColor, 5%);
+    }
+}
+
+// main page
+
 body {
     margin: 0;
     padding: 0;
@@ -24,6 +159,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     background-color: $headerBgColor;
+    box-shadow: 0px 0px 10px 6px $avatarColor;
+    z-index: 2;
 }
 
 .headerText{
@@ -41,11 +178,22 @@ body {
     flex-direction: column;
     align-items: flex-end;
     background-color: $headerBgColor;
+    .headerUserButtons{
+        display: flex;
+        flex-direction: row;
+    }
     h3 {
         @include textStyle(12pt, $mainColor);
         padding: .25rem;
         padding-right: .5rem;
         margin: 0;
+        padding-left: 30px;
+        background:url('../resource/miniAvatar.svg') left center no-repeat;
+    }
+    h4 {
+        @include textStyle(11pt, $mainColor);
+        padding: .1rem;
+        margin: 0 .5rem .25rem 0;
     }
     button {
         @include textStyle(10pt, $mainColor, bold);
@@ -55,17 +203,40 @@ body {
         border-radius: 15%;
         outline: none !important;
         padding: .1rem;
-        margin: 0 .5rem .25rem 0;
+        margin: 0 .5rem .2rem 0;
         color: inherit;
         background-color: transparent;
         color: $mainColor;
+        border-radius: 50%;
         cursor: pointer;
         &:hover {
             text-decoration: none;
             // background-color: darken($headerBgColor, 5%);
-            border-top: 1px solid $secondaryColor;
-            border-bottom: 1px solid $secondaryColor;
+            // border-bottom: 1px solid $secondaryColor;
+            box-shadow: 0px 0px 10px 6px $avatarColor;
         }
+        a{
+            @include textStyle(10pt, $mainColor, bold);
+            text-decoration: none;
+        }
+    }
+    .toTgBtn {
+        width: 20px;
+        height: 20px;
+        background: no-repeat;
+        background-image: url('../resource/tgLink.svg');
+    }
+    .logoutBtn {
+        width: 20px;
+        height: 20px;
+        background: no-repeat; 
+        background-image: url('../resource/logout.svg');
+    }
+    .cnctdBtn{
+        width: 20px;
+        height: 20px;
+        background: no-repeat; 
+        background-image: url('../resource/tgConnected.svg');
     }
 }
 
@@ -96,8 +267,10 @@ body {
     height: 35px;
     margin: 2.5px 0 2.5px 5px;
     text-align: center;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='35px' height='35px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+    // background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='35px' height='35px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+    background-image: url('../resource/menu.svg');
     display: none;
+    z-index: 3;
     }
 }
 
@@ -151,6 +324,19 @@ body {
     }
 }
 
+.all {
+    padding-left: 30px;
+    background:url('../resource/allTasks.svg') left center no-repeat;
+}
+.planned {
+    padding-left: 30px;
+    background:url('../resource/plannedTasks.svg') left center no-repeat;
+}
+.custom {
+    padding-left: 30px;
+    background:url('../resource/customTasks.svg') left center no-repeat;
+}
+
 .InputList{
     @include textStyle(13pt);
     padding: .5rem 1.25rem .5rem 1.25rem;
@@ -192,6 +378,9 @@ body {
     justify-content: left;
     flex-basis: 80%;
 }
+.fakeLists{
+    display: none;
+}
 
 .ContentContainer{
     display: flex;
@@ -221,7 +410,7 @@ body {
 
 .TaskListTitle {
     @include textStyle(15pt);
-    padding: .5rem 1rem .5rem 1rem;
+    padding: 1rem 1rem .5rem 1rem;
     margin: 0;
 }
   
@@ -235,6 +424,7 @@ body {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: 1px solid $mainColor;
     padding: 0;
     margin: 0;
@@ -269,13 +459,14 @@ body {
     &:before{
         content: '';
         display: inline-block;
-        width: 1em;
-        height: 1em;
+        width: 1.1em;
+        height: 1.1em;
         flex-shrink: 0;
         flex-grow: 0;
         border: 1px solid $borderColor;
         border-radius: 0.25em;
         margin-right: 0.5em;
+        margin-top: 0.2em;
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 50% 50%;
@@ -298,6 +489,10 @@ body {
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background: url('../resource/options.svg') center no-repeat;
 }
 
 .RmBtn {
@@ -309,6 +504,10 @@ body {
     color: inherit;
     background-color: transparent;
     cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+    background: url('../resource/trashcan.svg') center no-repeat;
 }
 
 .InputForm{
@@ -408,6 +607,11 @@ body {
             border-right: 1px solid $secondaryColor;
         }
     }
+    .RemindBtn{
+        width: 25px;
+        height: 25px;
+        background: url('../resource/setNotification.svg') center no-repeat;
+    }
 }
 
 @media screen and (max-width: 690px) {
@@ -455,6 +659,15 @@ body {
             }
         }
     }
+    .all{
+        padding-left: 30px;
+    }
+    .planned{
+        padding-left: 30px;
+    }
+    .custom{
+        padding-left: 30px;
+    }
     .InputList{
         @include textStyle(14pt);
         padding: 1rem 1.25rem 1rem 1.25rem;
@@ -464,7 +677,7 @@ body {
     }
     .TaskListTitle {
         @include textStyle(14pt);
-        padding: .5rem 1rem .5rem 2rem;
+        padding: 1rem 1rem .5rem 2rem;
         border-bottom: 1px solid $secondaryColor;
     }
     .TaskListItems {
@@ -473,10 +686,6 @@ body {
     .Task {
         @include textStyle(14pt);
         padding: .5rem 0 .5rem .1rem;
-        &:hover {
-            @include textStyle(14pt);
-            border: none;
-        }
     }
     .DescBtn {
         margin: 0 .4rem 0 .2rem;
@@ -507,15 +716,16 @@ body {
             @include textStyle(12pt, $mainColor);
             padding: 0 0 .5rem 4.5rem;
             margin: 0;
+            background:url('');
         }
         button {
             border-radius: 0;
             border-left: 1px solid $secondaryColor;
             margin: 0 0 .4rem .25rem;
-            padding: .1rem .5rem .1rem .5rem;
+            padding: .1rem 1.5rem .1rem .5rem;
             &:hover {
                 // background-color: darken($headerBgColor, 5%);
-                border-top: 1px solid $secondaryColor;
+                border-top: none;
                 border-bottom: 1px solid $secondaryColor;
             }
         }
@@ -541,7 +751,8 @@ body {
         height: 50px;
         margin: 25px 0 25px 5px;
         text-align: center;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='50px' height='50px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+        //background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='50px' height='50px' viewBox='0 0 66.137 66.137' style='enable-background:new 0 0 66.137 66.137;' xml:space='preserve'%3e%3cg%3e%3cg%3e%3cpath d='M33.068,66.136C14.834,66.136,0,51.302,0,33.069C0,14.835,14.834,0.001,33.068,0.001s33.069,14.834,33.069,33.068 C66.137,51.302,51.302,66.136,33.068,66.136z M33.068,4.001C17.04,4.001,4,17.041,4,33.069s13.04,29.067,29.068,29.067 s29.069-13.04,29.069-29.067S49.096,4.001,33.068,4.001z'/%3e%3crect x='18.02' y='31.069' width='30.098' height='2'/%3e%3crect x='18.02' y='20.428' width='30.098' height='2'/%3e%3crect x='18.019' y='41.709' width='30.099' height='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+        background-image: url('../resource/menu.svg');
         display: none;
         }
     }
@@ -555,8 +766,31 @@ body {
             }
             &:focus-within .leftMenu{
                 display: flex;
-                flex-basis: 150%;
+                flex-grow: 1;
+                width: 65%;
+                box-shadow: 0px 0px 30px 6px lighten($avatarColor,15%);
+                z-index: 1;
             }
+        }
+    }
+    .dropDown:hover ~ .lists{
+        display: none;
+    }
+    .dropDown:hover ~ .fakeLists {
+        @include textStyle(28pt, lighten($avatarColor, 15%), bold);
+        @include setMrPd();
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+        background-color: lighten($secondaryColor,8%);
+        writing-mode: vertical-lr;
+        align-items: center;
+    }
+
+    .Task {
+        &:hover {
+            border-color: $mainColor;
         }
     }
 }

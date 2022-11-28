@@ -9,7 +9,7 @@ module.exports = function (app) {
         try {
             // bot.context.db = { userId: '' }
             bot.start((ctx) => {
-                ctx.reply(`Hello, ${ctx.message.chat.id}.\nI'm your ToDo reminder.\nYou can add remind date for any of your tasks and I'll send you notification.`)
+                ctx.reply(`Greetings, human.\nI will remind you about your plans. That's all I can do, so don't expect more.`)
                 userId = ctx.message.chat.id
                 console.log('Successfully connected with ' + userId)
                 

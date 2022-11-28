@@ -93,7 +93,7 @@ function App() {
           if (moment(todo.date).format(format) === moment().format(format)) {
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${chatId}&text=Don't%20forget%20your%20scheduled%20tasks:%0A%20-${todo.title}`, {
               method: "GET"
-            }).then(console.log("Don't forget your scheduled tasks:\n" + " -" + todo.title))
+            }).then(console.log("Don't forget your sheduled task, human:\n" + " -" + todo.title))
             actions.updateTask(todo.id, todo.date = '', dispatch)
           }
         }
@@ -114,14 +114,14 @@ function App() {
             </div>
             <div className="headerUser">
               <h3>{state.user ? state.user.email : '---'}</h3>
-              <div>
+              <div className="headerUserButtons">
                 {
                   (!state.user.displayName) ?
-                    <button type='button' className="logoutBtn" title='Connect your Telegram' onClick={changeFlag}><a href="https://t.me/mtd_reminder_bot?start=666" target="_blank">Connect Telegram</a></button>
+                    <button type='button' className="toTgBtn" title='Connect your Telegram' onClick={changeFlag}><a href="https://t.me/mtd_reminder_bot?start=666" target="_blank"> </a></button>
                     :
-                    <h3>Telegram connected!{state.user.displayName}</h3>
+                    <button type='button' className="cnctdBtn" title='Telegram connected!'></button>
                 }
-                <button type='button' className="logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}>LogOut</button>
+                <button type='button' className="logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}> </button>
               </div>
             </div>
 
@@ -142,15 +142,15 @@ function App() {
               <div className="leftMenu">
                 <ul className="leftMenuList">
                   <li className="leftMenuListElem">
-                    <Link className="leftMenuLink" to="/all">Tasks</Link>
+                    <Link className="leftMenuLink all" to="/all">Tasks</Link>
                   </li>
                   <li className="leftMenuListElem">
-                    <Link className="leftMenuLink" to="/planned">Planned</Link>
+                    <Link className="leftMenuLink planned" to="/planned">Planned</Link>
                   </li>
                   <hr className="leftMenuSeparator"></hr>
                   {state.lists.map(item =>
                     <li className="leftMenuListElem" key={item.id}>
-                      <Link className="leftMenuLink" to={item.id}>
+                      <Link className="leftMenuLink custom" to={item.id}>
                         <div>{item.title}</div>
                         <button type='button' className='RemClBtn' onClick={() => { handleDelete(item.id) }} >✖</button>
                       </Link>
@@ -175,6 +175,7 @@ function App() {
                 </ul>
               </div>
             </div>
+            <div className="fakeLists">TASKS<span>⬆ ⬆ ⬆</span></div>
             <div className="lists">
               <Routes>
                 <Route path='/:listId' element={<TaskListContainer />} />

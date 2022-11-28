@@ -21,8 +21,8 @@ export default function Task({ todo, selectedTodo, onUpdate, onDelete, onSelect 
                     {todo.title}
                 </label>
 
-                <button type='button' className='DescBtn' onClick={() => onSelect(todo, { date: '' })} title='More Details'>📋</button>
-                <button type='button' className='RmBtn' onClick={() => onDelete(todo.id)} title='Remove'>❌</button>
+                <button type='button' className='DescBtn' onClick={() => onSelect(todo, { date: '' })} title='More Details'></button>
+                <button type='button' className='RmBtn' onClick={() => onDelete(todo.id)} title='Remove'></button>
             </li>
         </div>
 

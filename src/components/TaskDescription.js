@@ -79,7 +79,7 @@ export default function TaskDescription({ todo, onClose, onRemind }) {
                                 onChange={handleChange}
                                 style={{ width: '100%' }}
                             ></input>
-                            <button type='button' className='RemindBtn' onClick={handleRemind} title='Set Remind'>🔔</button>
+                            <button type='button' className='RemindBtn' onClick={handleRemind} title='Set Remind'></button>
                             {/* <input
                                 className="InputTask"
                                 type='text'

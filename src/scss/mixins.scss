@@ -4,3 +4,8 @@
     font-weight: $weight;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+@mixin setMrPd(){
+    margin: 0;
+    padding: 0;
+}
