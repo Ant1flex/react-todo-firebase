@@ -12,7 +12,7 @@ module.exports = function (app) {
                 ctx.reply(`Greetings, human.\nI will remind you about your plans. That's all I can do, so don't expect more.`)
                 userId = ctx.message.chat.id
                 console.log('Successfully connected with ' + userId)
-                
+
             })
             // bot.on('text', async (ctx, next) => {
             //     // Explicit usage

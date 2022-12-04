@@ -195,7 +195,7 @@ body {
         padding: .1rem;
         margin: 0 .5rem .25rem 0;
     }
-    button {
+    .profileBtn{
         @include textStyle(10pt, $mainColor, bold);
         text-decoration: underline;
         // border: 1px solid $borderColor;
@@ -218,6 +218,8 @@ body {
         a{
             @include textStyle(10pt, $mainColor, bold);
             text-decoration: none;
+            padding: .1rem;
+            margin: 0 .5rem .2rem 0;
         }
     }
     .toTgBtn {
@@ -718,7 +720,7 @@ body {
             margin: 0;
             background:url('');
         }
-        button {
+        .profileBtn {
             border-radius: 0;
             border-left: 1px solid $secondaryColor;
             margin: 0 0 .4rem .25rem;

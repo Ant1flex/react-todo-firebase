@@ -68,11 +68,15 @@ function App() {
   const [flag, setFlag] = useState(false)
 
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN
+  let userId = ''
 
   useEffect(() => {
       fetch("http://localhost:8000/")
       .then(res => res.json())
-      .then((result) => actions.updateUsername(result, dispatch))
+      .then((result) => {
+        actions.updateUsername(result, dispatch)
+        setChatId(result)
+      })
       .catch(err => console.log(err.name))
   }, [flag])
 
@@ -81,6 +85,7 @@ function App() {
 
   function changeFlag() {
     setFlag(!flag)
+    console.log("Flag changed: "+flag)
   }
 
   useEffect(() => {
@@ -89,9 +94,11 @@ function App() {
         if (todo.date !== '') {
           console.log(todo.title + ' tick')
           console.log('Current time:' + moment().format(format))
-          console.log('Remind at:' + moment(todo.date).format(format))
+          console.log('Remind user:' +state.user.displayName+ ' at:' + moment(todo.date).format(format))
           if (moment(todo.date).format(format) === moment().format(format)) {
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${chatId}&text=Don't%20forget%20your%20scheduled%20tasks:%0A%20-${todo.title}`, {
+            userId = state.user.displayName
+            console.log("Remind sent to user: "+userId)
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${userId}&text=Don't%20forget%20your%20scheduled%20task,%20human:%0A%20-${todo.title}`, {
               method: "GET"
             }).then(console.log("Don't forget your sheduled task, human:\n" + " -" + todo.title))
             actions.updateTask(todo.id, todo.date = '', dispatch)
@@ -117,11 +124,12 @@ function App() {
               <div className="headerUserButtons">
                 {
                   (!state.user.displayName) ?
-                    <button type='button' className="toTgBtn" title='Connect your Telegram' onClick={changeFlag}><a href="https://t.me/mtd_reminder_bot?start=666" target="_blank"> </a></button>
+                    //<button type='button' className="toTgBtn" title='Connect your Telegram' onClick={changeFlag}><a href="https://t.me/mtd_reminder_bot?start=666" target="_blank"></a></button>
+                    <a type='button' className="profileBtn toTgBtn" title='Connect your Telegram' href="https://t.me/mtd_reminder_bot?start=666" target="_blank" onClick={changeFlag}></a>
                     :
-                    <button type='button' className="cnctdBtn" title='Telegram connected!'></button>
+                    <button type='button' className="profileBtn cnctdBtn" title='Telegram connected!'></button>
                 }
-                <button type='button' className="logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}> </button>
+                <button type='button' className="profileBtn logoutBtn" title='LogOut' onClick={() => actions.logoutUser()}> </button>
               </div>
             </div>
 

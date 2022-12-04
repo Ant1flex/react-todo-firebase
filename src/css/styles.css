@@ -187,7 +187,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     padding: .1rem;
     margin: 0 .5rem .25rem 0; }
-  .headerUser button {
+  .headerUser .profileBtn {
     font-size: 10pt;
     color: white;
     font-weight: bold;
@@ -203,15 +203,17 @@ body {
     color: white;
     border-radius: 50%;
     cursor: pointer; }
-    .headerUser button:hover {
+    .headerUser .profileBtn:hover {
       text-decoration: none;
       box-shadow: 0px 0px 10px 6px #5a5a5a; }
-    .headerUser button a {
+    .headerUser .profileBtn a {
       font-size: 10pt;
       color: white;
       font-weight: bold;
       font-family: Arial, Helvetica, sans-serif;
-      text-decoration: none; }
+      text-decoration: none;
+      padding: .1rem;
+      margin: 0 .5rem .2rem 0; }
   .headerUser .toTgBtn {
     width: 20px;
     height: 20px;
@@ -698,12 +700,12 @@ body {
       padding: 0 0 .5rem 4.5rem;
       margin: 0;
       background: url(""); }
-    .headerUser button {
+    .headerUser .profileBtn {
       border-radius: 0;
       border-left: 1px solid #e7e3e3;
       margin: 0 0 .4rem .25rem;
       padding: .1rem 1.5rem .1rem .5rem; }
-      .headerUser button:hover {
+      .headerUser .profileBtn:hover {
         border-top: none;
         border-bottom: 1px solid #e7e3e3; }
 
