@@ -11,7 +11,6 @@ app.use(function (req, res, next) {
     next()
 })
 
-
 require('./routes')(app);
 
 app.listen(port, () => {
