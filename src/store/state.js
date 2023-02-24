@@ -1,5 +1,5 @@
-export default {
-    user: null,
-    lists: [],
-    todos: []
-}
+// export default {
+//     user: null,
+//     lists: [],
+//     todos: []
+// }

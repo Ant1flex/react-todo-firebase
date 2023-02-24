@@ -26,6 +26,3 @@ secrets/
 .env
 /server/.env
 /server/node_modules
-context/store.js
-hooks/
-store/
